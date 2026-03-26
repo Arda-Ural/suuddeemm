@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudem'e Özel ❤️</title>
+    <style>
+        body { font-family: sans-serif; background-color: #ffeef8; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .container { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 320px; }
+        #baby-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #ffb6c1; margin-bottom: 20px; }
+        h1 { color: #d63384; font-size: 20px; }
+        .buttons { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 20px; }
+        .btn { padding: 10px 20px; font-size: 16px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        #yes-btn { background-color: #4caf50; color: white; z-index: 1000; }
+        #no-btn { background-color: #f44336; color: white; }
+        #message { display: none; font-size: 22px; color: #2e7d32; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.pinimg.com/736x/8f/3b/b1/8f3bb1ca60773f32c69d8d641d40a3f9.jpg" id="baby-img">
+        <h1 id="question">Sudem, benimle kahve içmek ister misin? ❤️</h1>
+        <div class="buttons" id="btn-group">
+            <button class="btn" id="yes-btn" onclick="sayYes()">Evet</button>
+            <button class="btn" id="no-btn" onclick="sayNo()">Hayır</button>
+        </div>
+        <div id="message">Tamam! Hemen yanına geliyorum! 🥰🎉</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        let count = 0;
+        function sayNo() {
+            count++;
+            let yes = document.getElementById('yes-btn');
+            let no = document.getElementById('no-btn');
+            if (count === 1) { yes.style.padding = "20px 40px"; yes.style.fontSize = "22px"; no.innerText = "Emin misin?"; }
+            else if (count === 2) { yes.style.padding = "40px 80px"; yes.style.fontSize = "35px"; no.innerText = "Son kararın mı?"; }
+            else if (count >= 3) {
+                yes.style.position = "fixed"; yes.style.top = "0"; yes.style.left = "0";
+                yes.style.width = "100vw"; yes.style.height = "100vh"; yes.style.fontSize = "60px";
+                yes.innerText = "EVET! ❤️"; no.style.display = "none";
+            }
+        }
+        function sayYes() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            document.getElementById('baby-img').src = "https://i.pinimg.com/736x/83/80/f3/8380f33984d7a71876527b14d23a7e53.jpg";
+            document.getElementById('question').style.display = "none";
+            document.getElementById('btn-group').style.display = "none";
+            document.getElementById('message').style.display = "block";
+        }
+    </script>
+</body>
+</html>
