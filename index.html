@@ -6,15 +6,16 @@
     <title>Sudem'e Özel ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        :root { --pink: #d63384; --light-pink: #ffd1dc; --glow: rgba(214, 51, 132, 0.4); }
+        :root { --pink: #d63384; --glow: rgba(214, 51, 132, 0.4); }
         
-        body, html { height: 100%; margin: 0; overflow: hidden; font-family: 'Poppins', sans-serif; cursor: crosshair; }
+        /* Arka Plan Ayarı */
+        body, html { height: 100%; margin: 0; padding: 0; overflow: hidden; font-family: 'Poppins', sans-serif; }
         
-        /* 4. SEÇENEK: Sinematik Hareketli Arka Plan */
         .bg-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-color: #ffd1dc; /* Fotoğraf yüklenmezse pembe kalsın */
         }
+        
         .bg-image {
             width: 100%; height: 100%;
             background-image: url('sudem.jpg');
@@ -25,70 +26,113 @@
         }
         @keyframes panBg { 0% { transform: scale(1.1); } 100% { transform: scale(1.2) rotate(1deg); } }
 
-        body { display: flex; justify-content: center; align-items: center; perspective: 1000px; }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 
-        /* Konteyner */
+        /* Ana Kutu */
         .container { 
-            text-align: center; background: rgba(255, 255, 255, 0.82); 
-            padding: 50px; border-radius: 40px; 
-            box-shadow: 0 0 40px var(--glow), 0 25px 60px rgba(0, 0, 0, 0.4); 
-            width: 380px; position: relative; z-index: 10;
+            text-align: center; background: rgba(255, 255, 255, 0.85); 
+            padding: 40px; border-radius: 40px; 
+            box-shadow: 0 0 40px var(--glow), 0 20px 50px rgba(0, 0, 0, 0.4); 
+            width: 90%; max-width: 380px; position: relative; z-index: 10;
             backdrop-filter: blur(8px); border: 2px solid rgba(255,255,255,0.7);
-            transition: transform 0.1s ease-out;
         }
 
         #baby-img { 
-            width: 250px; height: 250px; border-radius: 30px; 
+            width: 220px; height: 220px; border-radius: 30px; 
             object-fit: cover; border: 5px solid white; 
-            margin-bottom: 25px; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            margin-bottom: 25px; transition: all 0.8s ease;
         }
 
-        h1 { color: var(--pink); font-size: 24px; min-height: 65px; font-weight: 600; margin-bottom: 25px; }
+        h1 { color: var(--pink); font-size: 22px; min-height: 60px; margin-bottom: 25px; }
 
-        .buttons { display: flex; justify-content: center; align-items: center; gap: 20px; }
+        .buttons { display: flex; justify-content: center; align-items: center; gap: 15px; }
 
-        .btn { 
-            padding: 14px 35px; font-size: 18px; border: none; border-radius: 50px; 
-            cursor: pointer; font-weight: 600; transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        #yes-btn { background: linear-gradient(45deg, #4caf50, #81c784); color: white; animation: pulse 2s infinite; }
+        .btn { padding: 12px 30px; font-size: 16px; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        
+        #yes-btn { background: #4caf50; color: white; animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-
+        
         #no-btn { background: #f44336; color: white; }
 
-        #message { 
-            display: none; font-family: 'Dancing Script', cursive; 
-            font-size: 40px; color: #2e7d32; margin-top: 20px; 
-            animation: celebrate 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
+        #message { display: none; font-family: 'Dancing Script', cursive; font-size: 35px; color: #2e7d32; margin-top: 20px; }
 
-        /* İMZA ALANI (Ardan 🤍) */
         .signature {
-            position: absolute; bottom: -60px; left: 0; right: 0;
+            position: absolute; bottom: -50px; left: 0; right: 0;
             font-family: 'Great Vibes', cursive; color: white;
-            font-size: 26px; opacity: 0.8; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            animation: fadeInSignature 2s ease forwards;
-        }
-        @keyframes fadeInSignature { from { opacity: 0; transform: translateY(10px); } to { opacity: 0.8; transform: translateY(0); } }
-
-        /* 2. SEÇENEK: Tıklama Efekti Kalbi */
-        .click-heart {
-            position: absolute; color: #ff4d6d; pointer-events: none;
-            font-size: 20px; animation: heartFly 1s ease-out forwards; z-index: 100;
-        }
-        @keyframes heartFly {
-            0% { transform: scale(1) translateY(0); opacity: 1; }
-            100% { transform: scale(2) translateY(-100px); opacity: 0; }
+            font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        @keyframes celebrate { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        /* Tıklama Kalbi */
+        .click-heart { position: absolute; color: #ff4d6d; pointer-events: none; animation: heartFly 1s forwards; z-index: 100; }
+        @keyframes heartFly { 0% { transform: scale(1) translateY(0); opacity: 1; } 100% { transform: scale(2) translateY(-100px); opacity: 0; } }
     </style>
 </head>
 <body>
 
     <div class="bg-container"><div class="bg-image"></div></div>
 
-    <div class="container" id
+    <div class="container" id="card">
+        <img src="huzunlu.jpg" id="baby-img">        
+        <h1 id="question"></h1>
+        <div class="buttons" id="btn-group">
+            <button class="btn" id="yes-btn" onclick="sayYes()">Evet</button>
+            <button class="btn" id="no-btn" onclick="sayNo()">Hayır</button>
+        </div>
+        <div id="message">Söz mü? ❤️<br>Seni seviyorum...</div>
+        <div class="signature">Ardan 🤍</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Yazı Yazma Efekti
+        const text = "Sudem, benimle kahve içmeye ne dersin? ❤️";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("question").innerHTML += text.charAt(i);
+                i++; setTimeout(typeWriter, 80);
+            }
+        }
+        window.onload = typeWriter;
+
+        // Tıklama Kalbi
+        document.addEventListener('click', (e) => {
+            const h = document.createElement('div');
+            h.classList.add('click-heart'); h.innerHTML = '❤️';
+            h.style.left = e.pageX + 'px'; h.style.top = e.pageY + 'px';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 1000);
+        });
+
+        let noCount = 0;
+        function sayNo() {
+            noCount++;
+            const yes = document.getElementById('yes-btn');
+            const no = document.getElementById('no-btn');
+            if (noCount === 1) { yes.style.padding = "20px 45px"; yes.style.fontSize = "22px"; no.innerText = "Emin misin?"; }
+            else if (noCount === 2) { yes.style.padding = "40px 90px"; yes.style.fontSize = "35px"; no.innerText = "Üzülürüm..."; }
+            else if (noCount >= 3) {
+                yes.style.position = "fixed"; yes.style.top = "0"; yes.style.left = "0";
+                yes.style.width = "100vw"; yes.style.height = "100vh"; yes.style.fontSize = "60px";
+                yes.innerText = "EVET! ❤️"; no.style.display = "none";
+            }
+        }
+
+        function sayYes() {
+            const duration = 10 * 1000;
+            const animationEnd = Date.now() + duration;
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                confetti({ particleCount: 30, spread: 60, origin: { x: Math.random(), y: Math.random() - 0.2 } });
+            }, 250);
+
+            document.getElementById('baby-img').src = "mutlu.jpg";
+            document.getElementById('question').style.display = "none";
+            document.getElementById('btn-group').style.display = "none";
+            document.getElementById('message').style.display = "block";
+            document.getElementById('yes-btn').style.display = "none";
+        }
+    </script>
+</body>
+</html>
